@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Gerenciador de tarefas - Alteração de tarefa</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div th:replace="fragmentos/fragmentos :: cabecalho"></div>
+	<div class="container">
+		<h3>Alteração de tarefa</h3>
+		<form class="form-horizontal" action="/tarefas/alterar" method="post"
+			th:object="${tarefa}">
+			<input type="hidden" th:field="*{id}">
+			<div class="row">
+				<div class="form-group col-md-6">
+				<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('titulo')}">
+					<label th:errors="*{titulo}" class="validation-message"></label>
+				</div>
+					<label>Titulo:</label> 
+					<input type="text" required maxlength="50" class="form-control" th:field="*{titulo}">
+				</div>
+			</div>
+	
+			<div class="row">
+				<div class="form-group col-md-6">
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('descricao')}">
+							<label th:errors="*{descricao}" class="validation-message"></label>
+						</div>
+					<label>Descrição:</label> 
+					<input type="text" maxlength="100" class="form-control" th:field="*{descricao}">
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-md-6">
+					<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('dataExpiracao')}">
+							<label th:errors="*{dataExpiracao}" class="validation-message"></label>
+					</div>
+					<label>Data de expiração:</label> 
+					<input type="date" class="form-control" th:field="*{dataExpiracao}">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Salvar</button>
+		</form>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		type="text/javascript"></script>
+</body>
+</html>

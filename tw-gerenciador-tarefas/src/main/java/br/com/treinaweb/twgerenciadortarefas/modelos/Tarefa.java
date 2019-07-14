@@ -8,23 +8,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "tar_tarefas")
 public class Tarefa {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tar_id")
 	private Long id;
 
 	@Column(name = "tar_titulo", length = 50, nullable = false)
+	@NotNull(message = "O título é obrigatório!")
+	@Length(max = 50, min = 3, message = "O título deve conter entre 3 e 50 caracteres")
 	private String titulo;
 
 	@Column(name = "tar_descricao", length = 100, nullable = false)
+	@Length(max = 50, message = "A descrição deve conter até 100 caracteres")
 	private String descricao;
 
 	@Column(name = "tar_data_expiracao", nullable = false)
+	@DateTimeFormat(pattern = "yyy-MM-dd")
 	private Date dataExpiracao;
 
 	@Column(name = "tar_concluida", nullable = false)
