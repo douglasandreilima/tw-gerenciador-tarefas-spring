@@ -1,10 +1,14 @@
 package br.com.treinaweb.twgerenciadortarefas.modelos;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -29,6 +33,9 @@ public class Usuario {
 	@Length(min = 5, max = 100, message = "A senha deve conter entre 5 e 100 caracteres")
 	private String senha;
 
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+	private List<Tarefa> tarefas;
+
 	public Long getId() {
 		return id;
 	}
@@ -51,6 +58,14 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public java.util.List<Tarefa> getTarefas() {
+		return tarefas;
+	}
+
+	public void setTarefas(java.util.List<Tarefa> tarefas) {
+		this.tarefas = tarefas;
 	}
 
 }
